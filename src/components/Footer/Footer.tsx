@@ -9,20 +9,10 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       <Link href="https://www.github.com/chelsiechey" target="_blank">
-        <GithubIcon
-          width={20}
-          height={20}
-          alt="Github"
-          className={styles.icon}
-        />
+        <GithubIcon width={20} height={20} className={styles.icon} />
       </Link>
       <Link href="https://www.linkedin.com/in/chelsieconrad" target="_blank">
-        <LinkedInIcon
-          width={20}
-          height={20}
-          alt="LinkedIn"
-          className={styles.icon}
-        />
+        <LinkedInIcon width={20} height={20} className={styles.icon} />
       </Link>
     </div>
   );
