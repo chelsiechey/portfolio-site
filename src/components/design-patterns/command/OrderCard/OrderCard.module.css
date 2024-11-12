@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-scaling-8px);
+  padding: var(--size-scaling-12px) 0px;
+  border-top: var(--size-scaling-1px) solid rgb(var(--gray-color-1));
+}
+
+.buttons {
+  display: flex;
+  gap: var(--size-scaling-8px);
+}

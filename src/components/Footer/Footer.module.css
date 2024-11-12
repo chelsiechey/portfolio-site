@@ -1,0 +1,17 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--size-scaling-50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-scaling-8px);
+  background-color: rgb(var(--black));
+}
+
+.icon {
+  cursor: pointer;
+}

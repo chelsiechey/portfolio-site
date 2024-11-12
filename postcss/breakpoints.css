@@ -1,0 +1,4 @@
+@custom-media --media-query-sm (min-width: 600px);
+@custom-media --media-query-md (min-width: 905px);
+@custom-media --media-query-lg (min-width: 1240px);
+@custom-media --media-query-xl (min-width: 1440px);

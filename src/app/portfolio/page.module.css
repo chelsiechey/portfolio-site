@@ -1,0 +1,40 @@
+.item {
+  position: relative;
+  background-size: cover !important;
+  background: inherit;
+}
+
+.item:hover .cardTitle {
+  transform: scale(1.05);
+}
+
+.item:nth-child(1) {
+  background: url("/flower-yellow.webp");
+  pointer-events: none;
+}
+
+.item:nth-child(2) {
+  background: url("/flower-green.webp");
+}
+
+/* TO DO - Add back when next portfolio piece is complete */
+/* .item:nth-child(3) {
+  background: url("/flower-purple.webp");
+} */
+
+.item:last-child {
+  background-color: rgb(var(--gray-color-1-shimmer));
+  pointer-events: none;
+}
+
+.cardTitle {
+  position: absolute;
+  right: var(--size-scaling-12px);
+  bottom: var(--size-scaling-12px);
+  font-size: var(--size-scaling-40px);
+  font-weight: bold;
+  padding: var(--size-scaling-12px);
+  -webkit-text-stroke-color: rgb(var(--black));
+  color: rgb(var(--white));
+  transition: transform 0.3s ease-in-out;
+}

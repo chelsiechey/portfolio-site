@@ -1,0 +1,14 @@
+.orderList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--size-scaling-24px);
+}
+
+.orderColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderColumn h3 {
+  margin-bottom: var(--size-scaling-12px);
+}

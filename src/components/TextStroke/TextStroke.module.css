@@ -1,0 +1,21 @@
+.text {
+  position: relative;
+  background: transparent;
+  z-index: 0;
+  display: inherit;
+  -webkit-text-fill-color: inherit;
+  -webkit-line-clamp: inherit;
+  -webkit-box-orient: inherit;
+  text-shadow: inherit;
+}
+
+.text:before {
+  content: attr(data-text);
+  position: absolute;
+  -webkit-text-stroke-width: var(--size-scaling-4px);
+  -webkit-text-stroke-color: inherit;
+  left: 0;
+  z-index: -1;
+  -webkit-line-clamp: inherit;
+  -webkit-box-orient: inherit;
+}

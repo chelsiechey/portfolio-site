@@ -1,0 +1,36 @@
+.button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--size-scaling-4px);
+  width: max-content;
+}
+
+.button.primary {
+  background-color: rgb(var(--primary-color));
+  color: rgb(var(--white));
+}
+
+.button.secondary {
+  background-color: rgb(var(--white));
+  color: rgb(var(--primary-color));
+  border: var(--size-scaling-1px) solid rgb(var(--primary-color));
+}
+
+.button.large {
+  padding: var(--size-scaling-20px);
+}
+
+.button.small {
+  padding: var(--size-scaling-8px);
+  font-size: var(--size-scaling-12px);
+}
+
+.button.primary.disabled {
+  background-color: rgba(var(--primary-color), 0.6);
+  cursor: not-allowed;
+}
+
+.button.secondary.disabled {
+  color: rgba(var(--primary-color), 0.6);
+  cursor: not-allowed;
+}

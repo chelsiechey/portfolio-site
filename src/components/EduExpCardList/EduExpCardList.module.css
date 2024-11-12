@@ -1,0 +1,96 @@
+.item {
+  background-color: rgb(var(--gray-color-1));
+}
+
+.itemInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--size-scaling-24px) var(--size-scaling-16px);
+}
+
+.dates {
+  font-size: var(--size-scaling-16px);
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-scaling-16px);
+  line-height: 2;
+}
+
+.item:hover {
+  background: linear-gradient(
+    -45deg,
+    rgb(var(--gray-color-1)) 40%,
+    rgb(var(--gray-color-1-shimmer)) 50%,
+    rgb(var(--gray-color-1)) 60%
+  );
+  background-size: 500%;
+  background-position-x: 100%;
+  animation: shimmer 1s forwards;
+  cursor: pointer;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+.title {
+  font-weight: bold;
+}
+
+.institution {
+  font-size: var(--size-scaling-28px);
+  color: rgb(var(--primary-color));
+  padding-bottom: var(--size-scaling-12px);
+}
+
+.img {
+  border-radius: var(--size-scaling-12px);
+  margin-bottom: var(--size-scaling-12px);
+}
+
+.modalHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-scaling-12px);
+  margin-bottom: var(--size-scaling-24px);
+}
+
+.skillList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: rgb(var(--gray-color-2));
+  width: calc(100vw - var(--size-scaling-32px));
+}
+
+.skillList li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-right: var(--size-scaling-12px);
+}
+
+.skillList li:not(:last-child)::after {
+  content: "•";
+  padding-left: var(--size-scaling-12px);
+}

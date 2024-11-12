@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--size-scaling-24px);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: var(--size-scaling-24px);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scaling-12px);
+  height: 100px;
+}
+
+@media (--media-query-lg) {
+  .container {
+    flex-direction: row;
+  }
+}

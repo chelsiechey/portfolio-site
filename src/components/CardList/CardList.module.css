@@ -1,0 +1,21 @@
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.item {
+  position: relative;
+  border: var(--size-scaling-4px) solid rgb(var(--gray-color-1-shimmer));
+  border-radius: var(--size-scaling-4px);
+  width: 300px;
+  height: 400px;
+}
+
+@media (--media-query-lg) {
+  .items {
+    justify-content: flex-start;
+  }
+}
