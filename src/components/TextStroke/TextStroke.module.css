@@ -10,8 +10,8 @@
 }
 
 .text:before {
-  content: attr(data-text);
   position: absolute;
+  content: attr(data-text);
   -webkit-text-stroke-width: var(--size-scaling-4px);
   -webkit-text-stroke-color: inherit;
   left: 0;

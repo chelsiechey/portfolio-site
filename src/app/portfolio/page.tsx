@@ -10,7 +10,7 @@ const Portfolio = () => {
   const { push } = useRouter();
   const links = [
     {
-      href: "/",
+      href: "",
       text: "Portfolio Site: You're Already Here!",
     },
     {
@@ -18,8 +18,8 @@ const Portfolio = () => {
       text: "Command Design Pattern: Restaurant Orders",
     },
     {
-      href: "/",
-      text: "Check Back For More Projects Soon!",
+      href: "",
+      text: "Check Back Soon For More Projects!",
     },
     // TO DO - Add back once complete!
     // {
@@ -34,11 +34,17 @@ const Portfolio = () => {
 
   return (
     <CardList
-      handleClick={(index) => push(links[index].href)}
+      handleClick={(index) => {
+        const href = links[index].href;
+        if (href) {
+          push(href);
+        }
+      }}
       itemClassName={styles.item}
       cardContent={links.map((link, index) => (
         <Link href={link.href} key={index}>
           <p className={styles.cardTitle}>
+            {index === links.length - 1 && <TextStroke>...</TextStroke>}
             <TextStroke>{link.text}</TextStroke>
           </p>
         </Link>
