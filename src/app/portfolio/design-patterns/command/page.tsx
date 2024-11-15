@@ -10,12 +10,9 @@ import { UndoCancelCommand } from "@/lib/design-patterns/command/UndoCancelComma
 import { StartCookingCommand } from "@/lib/design-patterns/command/StartCookingCommand";
 import { TickOrdersCommand } from "@/lib/design-patterns/command/TickOrdersCommand";
 import { Dish, Order } from "@/lib/design-patterns/command/types";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import GithubProjectLink from "@/components/design-patterns/GithubProjectLink/GithubProjectLink";
 
 const CommandPattern = () => {
-  const pathname = usePathname();
   const [orderManager] = useState(new OrderManager());
   const [orders, setOrders] = useState<Order[]>([]);
 

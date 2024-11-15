@@ -3,13 +3,10 @@
 import React from "react";
 import ColorForm from "@/components/design-patterns/factory/ColorForm/ColorForm";
 import styles from "../page.module.css";
-import { usePathname } from "next/navigation";
 import ThemeList from "@/components/design-patterns/factory/ThemeList/ThemeList";
-import Link from "next/link";
 import GithubProjectLink from "@/components/design-patterns/GithubProjectLink/GithubProjectLink";
 
 const Factory = () => {
-  const pathname = usePathname();
   return (
     <div className={styles.container}>
       <section className={styles.description}>
