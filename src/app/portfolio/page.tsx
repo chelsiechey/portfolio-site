@@ -18,18 +18,18 @@ const Portfolio = () => {
       text: "Command Design Pattern: Restaurant Orders",
     },
     {
-      href: "",
-      text: "Check Back Soon For More Projects!",
+      href: "/portfolio/design-patterns/factory",
+      text: "Factory Pattern: Theme Creator",
     },
     // TO DO - Add back once complete!
     // {
     //   href: "/portfolio/illustrations",
-    //   text: "Factory Pattern: User Creation",
-    // },
-    // {
-    //   href: "/portfolio/illustrations",
     //   text: "Flyweight Pattern: Reading List",
     // },
+    {
+      href: "",
+      text: "Check Back Soon For More Projects!",
+    },
   ];
 
   return (

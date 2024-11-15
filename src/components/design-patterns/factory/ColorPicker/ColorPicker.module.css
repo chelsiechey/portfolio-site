@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+}
+
+.swatch {
+  width: var(--size-scaling-32px);
+  height: var(--size-scaling-32px);
+  border-radius: var(--size-scaling-8px);
+  border: var(--size-scaling-2px) solid rgb(var(--white));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  gap: var(--size-scaling-8px);
+  align-items: center;
+}

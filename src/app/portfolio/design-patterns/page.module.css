@@ -18,6 +18,10 @@
   gap: var(--size-scaling-24px);
 }
 
+.bold {
+  font-weight: 700;
+}
+
 @media (--media-query-lg) {
   .container {
     flex-direction: row;

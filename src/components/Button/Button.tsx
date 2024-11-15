@@ -1,39 +1,28 @@
 "use client";
-import React, { useRef } from "react";
+import React, { CSSProperties, MutableRefObject, useRef } from "react";
 import styles from "./Button.module.css";
-import Link from "next/link";
 import { AriaButtonProps, useButton } from "react-aria";
+import { Button as ReactAriaButton } from "../react-aria/Button/Button";
 
-type ButtonProps = {
-  url?: string;
+export interface ButtonProps extends AriaButtonProps {
+  buttonRef?: MutableRefObject<null>;
+  className?: string;
+  style?: CSSProperties;
   size?: "small" | "large";
   variant?: "primary" | "secondary";
-} & AriaButtonProps;
+}
 
 const Button = ({
-  url,
   size = "large",
   variant = "primary",
+  className = "",
   ...props
 }: ButtonProps) => {
-  const ref = useRef<HTMLButtonElement | null>(null);
-  const { buttonProps } = useButton(props, ref);
-  const { children } = props;
-  const className = `${styles.button} ${styles[size]} ${styles[variant]} ${
-    props.isDisabled ? styles.disabled : ""
-  }`;
-  if (url) {
-    return (
-      <Link href={url}>
-        <div className={className}>{children}</div>
-      </Link>
-    );
-  }
-  return (
-    <button ref={ref} {...buttonProps} className={className}>
-      {children}
-    </button>
-  );
+  const buttonClassName = `${styles.button} ${styles[size]} ${
+    styles[variant]
+  } ${className} ${props.isDisabled ? styles.disabled : ""}`;
+
+  return <ReactAriaButton className={buttonClassName} {...props} />;
 };
 
 export default Button;

@@ -17,10 +17,9 @@
   background: url("/flower-green.webp");
 }
 
-/* TO DO - Add back when next portfolio piece is complete */
-/* .item:nth-child(3) {
+.item:nth-child(3) {
   background: url("/flower-purple.webp");
-} */
+}
 
 .item:last-child {
   background-color: rgb(var(--gray-color-1-shimmer));

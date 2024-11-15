@@ -7,7 +7,7 @@ import { useButton } from "react-aria";
 
 const Toggle = () => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const { mode, toggle } = useContext(ThemeContext);
+  const { activeTheme, toggle } = useContext(ThemeContext);
   const { buttonProps } = useButton({ onPress: toggle }, ref);
   return (
     <div className={styles.container} ref={ref} {...buttonProps}>
@@ -16,7 +16,7 @@ const Toggle = () => {
       <div
         className={styles.ball}
         style={
-          mode === "light"
+          activeTheme.name === "light"
             ? { left: "var(--size-scaling-2px)" }
             : { right: "var(--size-scaling-2px)" }
         }

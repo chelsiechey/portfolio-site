@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--size-scaling-24px);
+}
+
+.colorSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--size-scaling-8px);
+}

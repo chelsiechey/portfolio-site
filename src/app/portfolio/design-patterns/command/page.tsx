@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import OrderForm from "@/components/design-patterns/command/OrderForm/OrderForm";
 import OrderList from "@/components/design-patterns/command/OrderList/OrderList";
 import { OrderManager } from "@/lib/design-patterns/command/OrderManager";
@@ -11,6 +11,8 @@ import { StartCookingCommand } from "@/lib/design-patterns/command/StartCookingC
 import { TickOrdersCommand } from "@/lib/design-patterns/command/TickOrdersCommand";
 import { Dish, Order } from "@/lib/design-patterns/command/types";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import GithubProjectLink from "@/components/design-patterns/GithubProjectLink/GithubProjectLink";
 
 const CommandPattern = () => {
   const pathname = usePathname();
@@ -83,11 +85,7 @@ const CommandPattern = () => {
           add new actions, modify existing ones, or change the behavior of the
           system without altering the core logic.
         </p>
-        <p>
-          To see the code for this project, see my Github repository{" "}
-          <strong>portfolio-site</strong> at src/app{pathname}
-          /page.tsx
-        </p>
+        <GithubProjectLink />
       </section>
       <section className={styles.projectSection}>
         <OrderForm onPlaceOrder={placeOrder} />
