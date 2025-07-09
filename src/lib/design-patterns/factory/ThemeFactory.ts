@@ -9,7 +9,7 @@ export interface Theme {
   backgroundColor?: RGB;
   textColor?: RGB;
   primaryColor?: RGB;
-  primaryColor2?: RGB;
+  secondaryColor?: RGB;
   neutralColor?: RGB;
   neutralColor2?: RGB;
 }
@@ -19,6 +19,38 @@ export interface CreateThemeProps extends Omit<Theme, "id" | "apply"> {}
 const getCommaSeparatedRgb = (color: RGB): string =>
   `${color.r}, ${color.g}, ${color.b}`;
 
+const getLuminance = (color: RGB): number => {
+  return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;
+};
+
+const adjustColor = (color: RGB): RGB => {
+  const luminance = getLuminance(color);
+
+  if (luminance < 128) {
+    const factor = 0.2; // Lighten by 20%
+
+    const adjust = (value: number) =>
+      Math.max(0, Math.min(255, value + (255 - value) * factor));
+
+    return {
+      r: adjust(color.r),
+      g: adjust(color.g),
+      b: adjust(color.b),
+    };
+  } else {
+    const factor = 0.8; // Darken by 20%
+
+    const adjust = (value: number) =>
+      Math.max(0, Math.min(255, value * factor));
+
+    return {
+      r: adjust(color.r),
+      g: adjust(color.g),
+      b: adjust(color.b),
+    };
+  }
+};
+
 export const createTheme = ({
   name,
   black,
@@ -26,7 +58,7 @@ export const createTheme = ({
   backgroundColor,
   textColor,
   primaryColor,
-  primaryColor2,
+  secondaryColor,
   neutralColor,
   neutralColor2,
 }: CreateThemeProps): Theme => {
@@ -39,7 +71,7 @@ export const createTheme = ({
     backgroundColor,
     textColor,
     primaryColor,
-    primaryColor2,
+    secondaryColor,
     neutralColor,
     neutralColor2,
     apply() {
@@ -62,10 +94,10 @@ export const createTheme = ({
           "--primary-color",
           getCommaSeparatedRgb(primaryColor)
         );
-      primaryColor2 &&
+      secondaryColor &&
         document.body.style.setProperty(
-          "--primary-color-2",
-          getCommaSeparatedRgb(primaryColor2)
+          "--secondary-color",
+          getCommaSeparatedRgb(secondaryColor)
         );
       neutralColor &&
         document.body.style.setProperty(
@@ -76,6 +108,11 @@ export const createTheme = ({
         document.body.style.setProperty(
           "--gray-color-2",
           getCommaSeparatedRgb(neutralColor2)
+        );
+      neutralColor &&
+        document.body.style.setProperty(
+          "--gray-color-1-shimmer",
+          getCommaSeparatedRgb(adjustColor(neutralColor))
         );
     },
   };

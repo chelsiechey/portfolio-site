@@ -1,51 +1,13 @@
-.bodyNoScroll {
-  overflow-y: hidden;
-}
-
-.container {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
+.area {
+  position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   right: 0;
-  animation: 0.5s cubic-bezier(0, 0, 0.2, 1) slidein;
-  background-color: rgb(var(--gray-color-1));
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: var(--size-scaling-40px);
-  border-top: var(--size-scaling-8px) solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(
-    to left,
-    rgb(var(--primary-color)),
-    rgb(var(--secondary-color))
-  );
-}
-
-@keyframes slidein {
-  from {
-    transform: translateY(200%);
-  }
-  to {
-    transform: translateY(0%);
-  }
-}
-
-.closeButton {
-  align-self: flex-end;
-  width: var(--size-scaling-20px);
-  height: var(--size-scaling-20px);
-}
-
-.closeButton svg {
-  fill: rgb(var(--gray-color-2));
-}
-
-.closeButton:hover svg {
-  fill: rgb(var(--primary-color));
+  left: 0;
+  background: #4e54c8;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 .circles {

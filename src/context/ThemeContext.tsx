@@ -14,6 +14,8 @@ type ThemeContextType = {
   applyTheme: (theme: Theme) => void;
   saveTheme: (theme: CreateThemeProps) => Theme;
   removeTheme: (theme: Theme) => void;
+  lightTheme: Theme;
+  darkTheme: Theme;
 };
 
 type ThemeProviderType = {
@@ -26,13 +28,13 @@ export const ThemeProvider = ({ children }: ThemeProviderType) => {
   const darkTheme = useMemo(
     () =>
       createTheme({
-        name: "dark",
+        name: "Dark Theme",
         black: { r: 17, g: 17, b: 17 },
         white: { r: 255, g: 255, b: 255 },
         backgroundColor: { r: 17, g: 17, b: 17 },
         textColor: { r: 255, g: 255, b: 255 },
         primaryColor: { r: 83, g: 194, b: 139 },
-        primaryColor2: { r: 25, g: 76, b: 51 },
+        secondaryColor: { r: 25, g: 76, b: 51 },
         neutralColor: { r: 45, g: 45, b: 45 },
         neutralColor2: { r: 203, g: 203, b: 203 },
       }),
@@ -41,13 +43,13 @@ export const ThemeProvider = ({ children }: ThemeProviderType) => {
   const lightTheme = useMemo(
     () =>
       createTheme({
-        name: "light",
+        name: "Light Theme",
         black: { r: 17, g: 17, b: 17 },
         white: { r: 255, g: 255, b: 255 },
         backgroundColor: { r: 227, g: 227, b: 227 },
         textColor: { r: 17, g: 17, b: 17 },
         primaryColor: { r: 25, g: 76, b: 51 },
-        primaryColor2: { r: 58, g: 164, b: 111 },
+        secondaryColor: { r: 58, g: 164, b: 111 },
         neutralColor: { r: 203, g: 203, b: 203 },
         neutralColor2: { r: 45, g: 45, b: 45 },
       }),
@@ -93,7 +95,7 @@ export const ThemeProvider = ({ children }: ThemeProviderType) => {
   };
 
   const toggle = () => {
-    const newTheme = activeTheme.name === "dark" ? lightTheme : darkTheme;
+    const newTheme = activeTheme.name === "Dark Theme" ? lightTheme : darkTheme;
     applyTheme(newTheme);
   };
 
@@ -121,6 +123,8 @@ export const ThemeProvider = ({ children }: ThemeProviderType) => {
         saveTheme,
         themes,
         activeTheme,
+        lightTheme,
+        darkTheme,
       }}
     >
       <div className="theme">{children}</div>

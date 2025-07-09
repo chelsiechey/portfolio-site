@@ -5,8 +5,11 @@ import ColorForm from "@/components/design-patterns/factory/ColorForm/ColorForm"
 import styles from "../page.module.css";
 import ThemeList from "@/components/design-patterns/factory/ThemeList/ThemeList";
 import GithubProjectLink from "@/components/design-patterns/GithubProjectLink/GithubProjectLink";
+import { useOverlayTriggerState } from "react-stately";
+import Button from "@/components/Button/Button";
 
 const Factory = () => {
+  const themeListModalState = useOverlayTriggerState({});
   return (
     <div className={styles.container}>
       <section className={styles.description}>
@@ -37,8 +40,10 @@ const Factory = () => {
         <GithubProjectLink />
       </section>
       <section className={styles.projectSection}>
-        <ColorForm />
-        <ThemeList />
+        <ColorForm openThemeModal={themeListModalState.open} />
+        {themeListModalState.isOpen && (
+          <ThemeList state={themeListModalState} />
+        )}
       </section>
     </div>
   );

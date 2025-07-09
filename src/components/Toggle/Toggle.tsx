@@ -16,7 +16,7 @@ const Toggle = () => {
       <div
         className={styles.ball}
         style={
-          activeTheme.name === "light"
+          activeTheme.name === "Light Theme"
             ? { left: "var(--size-scaling-2px)" }
             : { right: "var(--size-scaling-2px)" }
         }

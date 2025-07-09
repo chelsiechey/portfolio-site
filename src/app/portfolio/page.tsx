@@ -12,14 +12,17 @@ const Portfolio = () => {
     {
       href: "",
       text: "Portfolio Site: You're Already Here!",
+      hasRibbon: false,
     },
     {
       href: "/portfolio/design-patterns/command",
       text: "Command Design Pattern: Restaurant Orders",
+      hasRibbon: false,
     },
     {
       href: "/portfolio/design-patterns/factory",
       text: "Factory Pattern: Theme Creator",
+      hasRibbon: true,
     },
     // TO DO - Add back once complete!
     // {
@@ -43,6 +46,11 @@ const Portfolio = () => {
       itemClassName={styles.item}
       cardContent={links.map((link, index) => (
         <Link href={link.href} key={index}>
+          {link.hasRibbon && (
+            <div className={styles.ribbon}>
+              <span className={styles.ribbonContent}>New</span>
+            </div>
+          )}
           <p className={styles.cardTitle}>
             {index === links.length - 1 && <TextStroke>...</TextStroke>}
             <TextStroke>{link.text}</TextStroke>

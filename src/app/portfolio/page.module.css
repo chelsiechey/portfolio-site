@@ -37,3 +37,55 @@
   color: rgb(var(--white));
   transition: transform 0.3s ease-in-out;
 }
+
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+.ribbonContent {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 10px 0;
+  background-color: rgb(var(--gray-color-1));
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+  color: rgb(var(--white));
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  border: 2px dotted rgb(var(--white));
+  outline: 5px solid rgb(var(--gray-color-1));
+}
+
+.ribbon::before,
+.ribbon::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.ribbon::before {
+  top: 0;
+  left: 0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-color: rgb(var(--gray-color-1));
+}
+
+.ribbon::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-color: rgb(var(--gray-color-1));
+}

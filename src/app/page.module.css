@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   max-width: 1366px;
-  min-height: calc(100vh - var(--size-scaling-50px));
+  height: calc(100% - 50px);
   margin: 0 auto;
   padding: 0 var(--size-scaling-16px) var(--size-scaling-96px);
+  overflow-y: hidden;
 }
 
 .layout h1 {
@@ -21,7 +22,8 @@
   gap: var(--size-scaling-96px);
 }
 
-.item {
+.item,
+.imgContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,18 +38,13 @@
 .title {
   background: linear-gradient(
     to bottom,
-    rgb(var(--primary-color-2)),
+    rgb(var(--secondary-color)),
     rgb(var(--gray-color-2))
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: pre-line;
-}
-
-.description {
-  font-size: var(--size-scaling-24px);
-  font-weight: 300;
 }
 
 @media (--media-query-sm) {

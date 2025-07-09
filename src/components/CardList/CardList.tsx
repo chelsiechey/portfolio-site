@@ -24,14 +24,15 @@ const CardList = ({
     },
     ref
   );
+
   return (
     <div className={styles.items}>
       {cardContent.map((content, index) => (
         <div
           id={index.toString()}
+          ref={ref}
           key={index}
           className={`${styles.item} ${itemClassName}`}
-          ref={ref}
           {...buttonProps}
         >
           {content}

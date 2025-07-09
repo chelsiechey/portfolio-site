@@ -1,21 +1,65 @@
 "use client";
-import React, {
-  FormEvent,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import styles from "./ColorForm.module.css";
 import Button from "@/components/Button/Button";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { ThemeContext } from "@/context/ThemeContext";
 import { ColorType, RGB } from "@/types/design-patterns/factory/types";
 
-const ColorForm = () => {
+// Define the validation schema using Yup
+const validationSchema = Yup.object({
+  name: Yup.string().required("Theme name is required"),
+  bg: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+  text: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+  primary: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+  secondary: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+  neutral: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+  neutral2: Yup.object({
+    r: Yup.number().min(0).max(255).required(),
+    g: Yup.number().min(0).max(255).required(),
+    b: Yup.number().min(0).max(255).required(),
+  }).required(),
+});
+
+interface ColorFormProps {
+  openThemeModal: () => void;
+}
+
+const ColorForm = ({ openThemeModal }: ColorFormProps) => {
   const { saveTheme, applyTheme, activeTheme } = useContext(ThemeContext);
+
   const getDefaultColor = useCallback(
-    (color: "backgroundColor" | "textColor" | "primaryColor") => {
+    (
+      color:
+        | "backgroundColor"
+        | "textColor"
+        | "primaryColor"
+        | "secondaryColor"
+        | "neutralColor"
+        | "neutralColor2"
+    ) => {
       if (activeTheme[color] !== undefined) {
         return {
           r: activeTheme[color]!.r,
@@ -29,42 +73,36 @@ const ColorForm = () => {
     [activeTheme]
   );
 
-  useEffect(() => {
-    if (activeTheme) {
-      setBackgroundColor(getDefaultColor("backgroundColor"));
-      setTextColor(getDefaultColor("textColor"));
-      setPrimaryColor(getDefaultColor("primaryColor"));
-    }
-  }, [activeTheme, getDefaultColor]);
+  // Initialize Formik form with default values
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      name: "",
+      bg: getDefaultColor("backgroundColor"),
+      text: getDefaultColor("textColor"),
+      primary: getDefaultColor("primaryColor"),
+      secondary: getDefaultColor("secondaryColor"),
+      neutral: getDefaultColor("neutralColor"),
+      neutral2: getDefaultColor("neutralColor2"),
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      const theme = saveTheme({
+        name: values.name,
+        backgroundColor: values.bg,
+        textColor: values.text,
+        primaryColor: values.primary,
+        secondaryColor: values.secondary,
+        neutralColor: values.neutral,
+        neutralColor2: values.neutral2,
+      });
+      applyTheme(theme);
+    },
+  });
 
-  const [backgroundColor, setBackgroundColor] = useState<RGB>(
-    getDefaultColor("backgroundColor")
-  );
-  const [textColor, setTextColor] = useState<RGB>(getDefaultColor("textColor"));
-  const [primaryColor, setPrimaryColor] = useState<RGB>(
-    getDefaultColor("primaryColor")
-  );
-  const [name, setName] = useState("");
-
+  // Update color in Formik state when a color picker changes
   const handleColorChange = (colorType: ColorType, colorValue: RGB) => {
-    if (colorType === "bg") {
-      setBackgroundColor(colorValue);
-    } else if (colorType === "text") {
-      setTextColor(colorValue);
-    } else {
-      setPrimaryColor(colorValue);
-    }
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const theme = saveTheme({
-      name,
-      backgroundColor,
-      textColor,
-      primaryColor,
-    });
-    applyTheme(theme);
+    formik.setFieldValue(colorType, colorValue);
   };
 
   const ColorSection = ({
@@ -88,29 +126,62 @@ const ColorForm = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={formik.handleSubmit} className={styles.form}>
       <h2>Set Background and Text Colors</h2>
-      <ColorSection
-        label="Background Color"
-        color={backgroundColor}
-        colorType="bg"
-      />
-      <ColorSection label="Text Color" color={textColor} colorType="text" />
-      <ColorSection
-        label="Primary Color"
-        color={primaryColor}
-        colorType="primary"
-      />
-      <label htmlFor="theme-name">Theme Name</label>
+      <div className={styles.colors}>
+        <ColorSection
+          label="Background Color"
+          color={formik.values.bg}
+          colorType="bg"
+        />
+        <ColorSection
+          label="Text Color"
+          color={formik.values.text}
+          colorType="text"
+        />
+        <ColorSection
+          label="Primary Color"
+          color={formik.values.primary}
+          colorType="primary"
+        />
+        <ColorSection
+          label="Secondary Color"
+          color={formik.values.secondary}
+          colorType="secondary"
+        />
+        <ColorSection
+          label="Neutral Color"
+          color={formik.values.neutral}
+          colorType="neutral"
+        />
+        <ColorSection
+          label="Neutral Color #2"
+          color={formik.values.neutral2}
+          colorType="neutral2"
+        />
+      </div>
+      <label htmlFor="name">Theme Name</label>
       <input
         type="text"
-        id="theme-name"
-        name="theme-name"
-        required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        id="name"
+        name="name"
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
-      <Button type="submit">Save and Apply</Button>
+      <div className={styles.buttons}>
+        <Button
+          type="submit"
+          isDisabled={
+            !formik.isValid || formik.isSubmitting || !formik.values.name
+          }
+        >
+          Save and Apply
+        </Button>
+        <Button onPress={openThemeModal} variant="secondary">
+          View Themes
+        </Button>
+      </div>
     </form>
   );
 };

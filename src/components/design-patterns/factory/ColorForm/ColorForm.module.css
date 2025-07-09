@@ -5,9 +5,20 @@
   gap: var(--size-scaling-24px);
 }
 
+.colors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--size-scaling-24px);
+  width: 100%;
+}
+
 .colorSection {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: var(--size-scaling-8px);
+}
+
+.buttons {
+  display: flex;
   gap: var(--size-scaling-8px);
 }

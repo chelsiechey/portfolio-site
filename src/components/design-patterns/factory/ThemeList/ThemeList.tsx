@@ -3,49 +3,80 @@ import styles from "./ThemeList.module.css";
 import Button from "@/components/Button/Button";
 import { ThemeContext } from "@/context/ThemeContext";
 import ColorSwatch from "../ColorSwatch/ColorSwatch";
+import FullPageModal from "@/components/FullPageModal/FullPageModal";
+import { OverlayTriggerState } from "react-stately";
 
-const ThemeList = () => {
-  const { themes, applyTheme, removeTheme } = useContext(ThemeContext);
+interface ThemeListProps {
+  state: OverlayTriggerState;
+}
+const ThemeList = ({ state }: ThemeListProps) => {
+  const { themes, applyTheme, removeTheme, lightTheme, darkTheme } =
+    useContext(ThemeContext);
 
-  if (themes.length) {
-    return (
+  return (
+    <FullPageModal state={state}>
       <div className={styles.container}>
-        <h2>Created Themes</h2>
-        {themes.map((theme, index) => {
-          return (
-            <div key={index} className={styles.themesContainer}>
-              <h3>{theme.name ? theme.name : `Theme ${index + 1}`}</h3>
-              {theme.backgroundColor && (
-                <div className={styles.theme}>
-                  <p>Background Color</p>
-                  <ColorSwatch color={theme.backgroundColor} />
+        <h1>Saved Themes</h1>
+        <div className={styles.themes}>
+          {[...themes, lightTheme, darkTheme].map((theme, index) => {
+            return (
+              <div key={index} className={styles.themeContainer}>
+                <h3>{theme.name ? theme.name : `Theme ${index + 1}`}</h3>
+                {theme.backgroundColor && (
+                  <div className={styles.theme}>
+                    <p>Background Color</p>
+                    <ColorSwatch color={theme.backgroundColor} />
+                  </div>
+                )}
+                {theme.textColor && (
+                  <div className={styles.theme}>
+                    <p>Text Color</p>
+                    <ColorSwatch color={theme.textColor} />
+                  </div>
+                )}
+                {theme.primaryColor && (
+                  <div className={styles.theme}>
+                    <p>Primary Color</p>
+                    <ColorSwatch color={theme.primaryColor} />
+                  </div>
+                )}
+                {theme.secondaryColor && (
+                  <div className={styles.theme}>
+                    <p>Secondary Color</p>
+                    <ColorSwatch color={theme.secondaryColor} />
+                  </div>
+                )}
+                {theme.neutralColor && (
+                  <div className={styles.theme}>
+                    <p>Neutral Color</p>
+                    <ColorSwatch color={theme.neutralColor} />
+                  </div>
+                )}
+                {theme.neutralColor2 && (
+                  <div className={styles.theme}>
+                    <p>Neutral Color 2</p>
+                    <ColorSwatch color={theme.neutralColor2} />
+                  </div>
+                )}
+                <div className={styles.buttons}>
+                  <Button onPress={() => applyTheme(theme)}>Apply</Button>
+                  {theme.name !== "Light Theme" &&
+                    theme.name !== "Dark Theme" && (
+                      <Button
+                        variant="secondary"
+                        onPress={() => removeTheme(theme)}
+                      >
+                        Remove
+                      </Button>
+                    )}
                 </div>
-              )}
-              {theme.textColor && (
-                <div className={styles.theme}>
-                  <p>Text Color</p>
-                  <ColorSwatch color={theme.textColor} />
-                </div>
-              )}
-              {theme.primaryColor && (
-                <div className={styles.theme}>
-                  <p>Primary Color</p>
-                  <ColorSwatch color={theme.primaryColor} />
-                </div>
-              )}
-              <div className={styles.buttons}>
-                <Button onPress={() => applyTheme(theme)}>Apply</Button>
-                <Button variant="secondary" onPress={() => removeTheme(theme)}>
-                  Remove
-                </Button>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    );
-  }
-  return <></>;
+    </FullPageModal>
+  );
 };
 
 export default ThemeList;

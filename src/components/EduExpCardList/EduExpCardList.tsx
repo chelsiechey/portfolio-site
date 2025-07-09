@@ -4,6 +4,7 @@ import Image from "next/image";
 import CardList from "../CardList/CardList";
 import { useOverlayTriggerState } from "react-stately";
 import FullPageModal from "../FullPageModal/FullPageModal";
+import TextStroke from "../TextStroke/TextStroke";
 
 type EduExpCardListProps = {
   itemList: {
@@ -48,7 +49,9 @@ const EduExpCardList = ({ itemList }: EduExpCardListProps) => {
                 height={100}
                 className={styles.img}
               />
-              <p className={styles.institution}>{item.institution}</p>
+              <p className={styles.institution}>
+                <TextStroke>{item.institution}</TextStroke>
+              </p>
               <p className={styles.title}>{item.title}</p>
             </div>
             <p className={styles.dates}>
@@ -61,29 +64,33 @@ const EduExpCardList = ({ itemList }: EduExpCardListProps) => {
       />
       {selectedItem && modalState.isOpen && (
         <FullPageModal state={modalState}>
-          <div className={styles.modalHeading}>
-            <Image
-              src={selectedItem.imgSrc}
-              alt={selectedItem.imgAlt}
-              width={100}
-              height={100}
-            />
-            <p className={styles.institution}>{selectedItem.institution}</p>
-            <p className={styles.title}>{selectedItem.title}</p>
-            <p className={styles.dates}>
-              {selectedItem.startDate === selectedItem.endDate
-                ? selectedItem.startDate
-                : `${selectedItem.startDate} - ${selectedItem.endDate}`}
-            </p>
-            {selectedItem.skillList?.length && (
-              <ul className={styles.skillList}>
-                {selectedItem.skillList.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))}
-              </ul>
-            )}
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeading}>
+              <Image
+                src={selectedItem.imgSrc}
+                alt={selectedItem.imgAlt}
+                width={100}
+                height={100}
+              />
+              <p className={styles.institution}>
+                <TextStroke>{selectedItem.institution}</TextStroke>
+              </p>
+              <p className={styles.title}>{selectedItem.title}</p>
+              <p className={styles.dates}>
+                {selectedItem.startDate === selectedItem.endDate
+                  ? selectedItem.startDate
+                  : `${selectedItem.startDate} - ${selectedItem.endDate}`}
+              </p>
+              {selectedItem.skillList?.length && (
+                <ul className={styles.skillList}>
+                  {selectedItem.skillList.map((skill, index) => (
+                    <li key={index}>{skill}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <p className={styles.desc}>{selectedItem.description}</p>
           </div>
-          <p className={styles.desc}>{selectedItem.description}</p>
         </FullPageModal>
       )}
     </>
